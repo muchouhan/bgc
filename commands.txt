@@ -1,0 +1,55 @@
+mkdir bgc-app
+cd bgc-app
+truffle unbox pet-shop
+truffle develop
+>compile
+>migrate
+>npm run dev
+
+
+truffle migrate --compile-all --reset --network development
+truffle console --network development
+
+test
+
+BGC.deployed().then(function(instance){app= instance;})
+app.getGreetings()
+app.setGreetings("Hello Mukund",{from:web3.eth.accounts[0]})
+
+
+
+app.addOrg("LTI","123456","Password",{from:web3.eth.accounts[1]})
+app.addOrg("CG","3333456","Password",{from:web3.eth.accounts[2]})
+app.getOrgSize()
+app.getOrg(web3.eth.accounts[1])
+app.authenticateOrg(web3.eth.accounts[1],"Password")
+app.authenticateOrg(web3.eth.accounts[2],"Password1")
+app.isOrgExist("LTI","123456")
+app.isOrgExist("TCS","2223456")
+
+app.addEmployee("Password","Mukund","Chouhan","103 Jay Shiv darshan",8839202104,web3.eth.accounts[1],9,{from:web3.eth.accounts[3]})
+app.addEmployee("Password","Sarthak","Chouhan","103 Jay Shiv darshan",8839202104,web3.eth.accounts[2],1,{from:web3.eth.accounts[4]})
+
+app.getEmployeeSize()
+app.getEmployee(web3.eth.accounts[3])
+app.authenticateEmployee(web3.eth.accounts[3],"Password")
+
+
+
+
+Web3 = require('web3')
+web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+web3.eth.accounts
+code = fs.readFileSync('contracts\\BGC.sol').toString()
+solc = require('solc')
+compiledCode = solc.compile(code)
+abiDefinition = JSON.parse(compiledCode.contracts[':BGC'].interface)
+VotingContract = web3.eth.contract(abiDefinition)
+byteCode = compiledCode.contracts[':BGC'].bytecode
+
+deployedContract = VotingContract.new(['Rama','Nick','Jose'],{data: byteCode, from: web3.eth.accounts[0], gas: 4700000})
+deployedContract.address
+contractInstance = VotingContract.at(deployedContract.address)
+
+
+

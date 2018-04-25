@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--title-->
+    <title>Home</title>
+
+     <!-- Bootstrap Core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="../css/agency.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!--different links-->
+    <ul class="nav nav-tabs navbar-inverse">
+        <!--Go back to home page-->
+        <li><a href="../index.html">Home </a></li>
+
+        <!--Bank details displayed on this page itself. Have to work on this part-->
+        <li class="active"><a href="#form2">Details</a></li>
+
+        <!--enter the username of a customer to view his kyc details-->
+        <li><a data-toggle="modal" data-target="#viewKYC">View KYC</a></li>
+
+        <!-- modify a persons kyc details-->
+        <li><a href="./form/addForm.html">Add KYC</a></li>
+
+        <!--enter the username of a customer to modify his kyc details-->
+        <li><a data-toggle="modal" data-target="#modifyKYC">Modify KYC</a></li>
+
+        <!--change the rating of an account holder-->
+        <li><a data-toggle="modal" data-target="#modify_rating">Change customer rating</a></li>
+    </ul>
+
+    <!--Bank Details-->
+    <div class="tab-content">
+        <div id="form1" class="tab-pane fade in active">
+            <form class="well form-horizontal" id="contact_form">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Org Name</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <label class="control-label" id="org_name">Null</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Org Registration No</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <label class="control-label" id="reg_no">Null</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Total Employees</label>
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <label class="control-label" id="emp_count">Null</label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <!--view KYC username verification form-->
+    <div id="viewKYC" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!--Modal Content-->
+            <div class="modal-content">
+
+                <!--Modal Body-->
+                <div class="container">
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <!-- Username -->
+                                    <label class="control-label" for="username">Username</label>
+                                    <div class="controls">
+                                        <!--verify the username from the block-chain-->
+                                        <input type="text" name="username" placeholder="" class="input-xlarge" id="user_name_v">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                <!--Modal Footer-->
+                <div class="modal-footer">
+                    <!--On clicking this button verify the username from the block-chain-->
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" id="log_in" onclick="clickViewKYC()">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modify KYC-->
+    <div id="modifyKYC" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!--Modal Content-->
+            <div class="modal-content">
+
+                <!--Modal Body-->
+                <div class="container">
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <!-- Username -->
+                                    <label class="control-label" for="username">Username</label>
+                                    <div class="controls">
+                                        <!--verify the username from the block-chain-->
+                                        <input type="text" name="username" placeholder="" class="input-xlarge" id="user_name_m">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                <!--Modal Footer-->
+                <div class="modal-footer">
+                    <!--On clicking this button verify the username from the block-chain-->
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" id="log_in" onclick="clickModifyKYC()">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modify rating-->
+    <div id="modify_rating" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!--Modal Content-->
+            <div class="modal-content">
+
+                <!--Modal Body-->
+                <div class="container">
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <!-- Username -->
+                                    <label class="control-label" for="username">Username</label>
+                                    <div class="controls">
+                                        <!--verify the username from the block-chain-->
+                                        <input type="text" name="username" placeholder="" class="input-xlarge" id="user_name_mr">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                <!--Modal Footer-->
+                <div class="modal-footer">
+
+                    <!--Increase rating-->
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="increaseRating()" id="rating_inc">Increase Rating</button>
+
+                    <!--Decrease rating-->
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="decreaseRating()" id="rating_dec">Decrease Rating</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	 <script language="JavaScript" type="text/javascript">
+		App.fillDetails();
+	 </script>
+	
+	
+	
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Bootstrap Core JavaScript -->
+    <script src="../js/bootstrap.min.js"></script>
+	<!-- JS source files -->
+    <script src="../js/web3.min.js"></script>
+	<script src="../js/truffle-contract.js"></script>
+	<script src="../js/index.js"></script>
+	
+</body>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--title-->
+    <title>BGC Chain</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="./css/agency.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation bar-->
+    <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container">
+            <!-- For better display in small screen sizes -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                    </button>
+                <a class="navbar-brand page-scroll" href="#page-top">BGC chain</a>
+            </div>
+
+            <!-- Different links for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <!--for easier navigation in the page-->
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+
+                </ul>
+
+                <!--signup and login-->
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a data-toggle="modal" data-target="#signUp" id="sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a data-toggle="modal" data-target="#logIn" id="log_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tell Me More -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-heading">BGC chain</div>
+                <div class="intro-lead-out">Be a part of the global BGC-Chain......</div>
+            </div>
+        </div>
+    </header>
+
+    <!--Modal for signUp-->
+    <div id="signUp" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!--Modal Content-->
+            <div class="modal-content">
+
+                <!--Modal Header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                    <h3 align="center"> Register your Org</h3>
+                </div>
+
+                <!--Modal Body-->
+                <div class="container">
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <!-- Name of Bank -->
+                                    <label class="control-label" for="username">Org Name</label>
+                                    <div class="controls">
+                                        <!--Take info from here and store it in the block-chain-->
+                                        <input type="text" id="username" name="username_1" placeholder="" class="input-xlarge">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="container">
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <!-- Name of Bank -->
+                                    <label class="control-label" for="username">Password</label>
+                                    <div class="controls">
+                                        <!--Take info from here and store it in the block-chain-->
+                                        <input type="text" id="password" name="password_s" placeholder="" class="input-xlarge">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <!-- Name of Bank -->
+                                    <label class="control-label" for="username">Registration No</label>
+                                    <div class="controls">
+                                        <!--Take info from here and store it in the block-chain-->
+                                        <input type="text" id="reg_no" name="reg_no" placeholder="" class="input-xlarge">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                <!--Modal Footer-->
+                <div class="modal-footer">
+				  <button type="button" class="btn btn-primary btn-success" data-dismiss="modal" onclick="App.onSignUp(); return false;">Sign up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal for logIn-->
+    <div id="logIn" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!--Modal Content-->
+            <div class="modal-content">
+
+                <!--Modal Header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">X</button>
+                    <h3 align="center"> Log In </h3>
+                </div>
+
+                <!--Modal Body-->
+                <div class="container">
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <!-- Name of Bank -->
+                                    <label class="control-label" for="username">Org Name</label>
+                                    <div class="controls">
+                                        <!--Take info from here and store it in the block-chain-->
+                                        <input type="text" id="username_l" name="username_2" placeholder="" class="input-xlarge">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="container">
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <fieldset>
+                                <div class="control-group">
+                                    <!-- Name of Bank -->
+                                    <label class="control-label" for="username">Password</label>
+                                    <div class="controls">
+                                        <!--Take info from here and store it in the block-chain-->
+                                        <input type="text" id="password_l" name="password_l" placeholder="" class="input-xlarge">
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+                <!--Modal Footer-->
+                <div class="modal-footer">
+                    <!--change the onclick so that it verifies account no from the blockchain-->
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" id="log_in" onclick="App.onLogin(); return false;">Log In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+	<!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	
+	<!-- JS source files -->
+    <script src="js/web3.min.js"></script>
+	<script src="js/truffle-contract.js"></script>
+	<script src="js/index.js"></script>
+	
+	
+</body>
+
+</html>

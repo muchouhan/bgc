@@ -1,0 +1,211 @@
+{
+  "contractName": "Addresses",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_base",
+          "type": "address"
+        }
+      ],
+      "name": "isContract",
+      "outputs": [
+        {
+          "name": "_r",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6060604052341561000f57600080fd5b60c18061001d6000396000f300606060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806316279055146044575b600080fd5b606e600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506088565b604051808215151515815260200191505060405180910390f35b600080823b1190509190505600a165627a7a72305820d50fc12ab1f3c76ecfbade91b0bb789bd4ee83afa44ede51334a80bb32f5ed530029",
+  "deployedBytecode": "0x606060405260043610603f576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806316279055146044575b600080fd5b606e600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506088565b604051808215151515815260200191505060405180910390f35b600080823b1190509190505600a165627a7a72305820d50fc12ab1f3c76ecfbade91b0bb789bd4ee83afa44ede51334a80bb32f5ed530029",
+  "sourceMap": "228:440:0:-;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "228:440:0:-;;;;;;;;;;;;;;;;;;;;;;;;528:137;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;572:7;645:1;637:5;625:11;622:2;616:31;;601:57;;;:::o",
+  "source": "pragma solidity ^0.4.0;\r\n\r\n/**\r\n * Addresses Library\r\n * \r\n * In summary this is a simple library of address functions which extends the\r\n * pre-existing functionality\r\n * \r\n * @author James Lockhart <james@n3tw0rk.co.uk>\r\n */\r\nlibrary Addresses {\r\n    /**\r\n     * Is Contract\r\n     * \r\n     * Check to see if the subject address is a contract on the Ethereum network\r\n     * \r\n     * @param _base The address on the network to check if it is a contract\r\n     * @return bool Returns true if it is a valid contract\r\n     */\r\n    function isContract(address _base) returns (bool _r) {\r\n        assembly {\r\n            _r := gt(extcodesize(_base), 0)\r\n        }\r\n    }\r\n}",
+  "sourcePath": "G:\\bgc-app\\contracts\\Addresses.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/G/bgc-app/contracts/Addresses.sol",
+      "exportedSymbols": {
+        "Addresses": [
+          11
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".0"
+          ]
+        },
+        "id": 1,
+        "name": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "library",
+          "documentation": "Addresses Library\r\n\r\nIn summary this is a simple library of address functions which extends the\r\npre-existing functionality\r\n\r\n@author James Lockhart <james@n3tw0rk.co.uk>\r",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            11
+          ],
+          "name": "Addresses",
+          "scope": 12
+        },
+        "children": [
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "isContract",
+              "payable": false,
+              "scope": 11,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_base",
+                      "scope": 10,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 2,
+                        "name": "ElementaryTypeName",
+                        "src": "548:7:0"
+                      }
+                    ],
+                    "id": 3,
+                    "name": "VariableDeclaration",
+                    "src": "548:13:0"
+                  }
+                ],
+                "id": 4,
+                "name": "ParameterList",
+                "src": "547:15:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_r",
+                      "scope": 10,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "bool",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "bool",
+                          "type": "bool"
+                        },
+                        "id": 5,
+                        "name": "ElementaryTypeName",
+                        "src": "572:4:0"
+                      }
+                    ],
+                    "id": 6,
+                    "name": "VariableDeclaration",
+                    "src": "572:7:0"
+                  }
+                ],
+                "id": 7,
+                "name": "ParameterList",
+                "src": "571:9:0"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "externalReferences": [
+                        {
+                          "_base": {
+                            "declaration": 3,
+                            "isOffset": false,
+                            "isSlot": false,
+                            "src": "637:5:0",
+                            "valueSize": 1
+                          }
+                        },
+                        {
+                          "_r": {
+                            "declaration": 6,
+                            "isOffset": false,
+                            "isSlot": false,
+                            "src": "616:2:0",
+                            "valueSize": 1
+                          }
+                        }
+                      ],
+                      "operations": "{\n    _r := gt(extcodesize(_base), 0)\n}"
+                    },
+                    "children": [],
+                    "id": 8,
+                    "name": "InlineAssembly",
+                    "src": "592:73:0"
+                  }
+                ],
+                "id": 9,
+                "name": "Block",
+                "src": "581:84:0"
+              }
+            ],
+            "id": 10,
+            "name": "FunctionDefinition",
+            "src": "528:137:0"
+          }
+        ],
+        "id": 11,
+        "name": "ContractDefinition",
+        "src": "228:440:0"
+      }
+    ],
+    "id": 12,
+    "name": "SourceUnit",
+    "src": "0:668:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.18+commit.9cf6e910.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-04-25T15:41:35.187Z"
+}
