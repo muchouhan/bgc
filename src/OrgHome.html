@@ -30,10 +30,8 @@
         <li><a href="./addBgc.html">Add BGC</a></li>
 
         <!--enter the username of a customer to modify his kyc details-->
-        <li><a data-toggle="modal" data-target="#modifyKYC">Modify BGC</a></li>
+        <li><a data-toggle="modal" data-target="#modifyBGC">Modify BGC</a></li>
 
-        <!--change the rating of an account holder-->
-        <li><a data-toggle="modal" data-target="#modify_rating">Change customer rating</a></li>
     </ul>
 
     <!--Bank Details-->
@@ -106,7 +104,7 @@
     </div>
 
     <!--Modify KYC-->
-    <div id="modifyKYC" class="modal fade" role="dialog">
+    <div id="modifyBGC" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!--Modal Content-->
@@ -133,49 +131,12 @@
                 <!--Modal Footer-->
                 <div class="modal-footer">
                     <!--On clicking this button verify the username from the block-chain-->
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal" id="log_in" onclick="clickModifyKYC()">Search</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" id="log_in" onclick="App.clickModifyBGC(); return false">Search</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!--Modify rating-->
-    <div id="modify_rating" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!--Modal Content-->
-            <div class="modal-content">
-
-                <!--Modal Body-->
-                <div class="container">
-                    <div class="modal-body">
-                        <form class="form-horizontal">
-                            <fieldset>
-                                <div class="control-group">
-                                    <!-- Username -->
-                                    <label class="control-label" for="username">Username</label>
-                                    <div class="controls">
-                                        <!--verify the username from the block-chain-->
-                                        <input type="text" name="username" placeholder="" class="input-xlarge" id="user_name_mr">
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-
-                <!--Modal Footer-->
-                <div class="modal-footer">
-
-                    <!--Increase rating-->
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="increaseRating()" id="rating_inc">Increase Rating</button>
-
-                    <!--Decrease rating-->
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="decreaseRating()" id="rating_dec">Decrease Rating</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 

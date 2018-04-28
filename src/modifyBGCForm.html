@@ -1,27 +1,23 @@
 <!DOCTYPE html>
-
+<html lang="en">
 
 <head>
-    <title>Employee Home</title>
-  
+
+    <title>MOdify BGC Form</title>
+
 	<link rel="stylesheet" type="text/css" href="./css/index.css" />
-	
 	<!-- Bootstrap Core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Theme CSS -->
     <link href="./css/agency.css" rel="stylesheet">
- 
+
 </head>
 
 <body>
 
+
     <ul class="nav nav-tabs navbar-inverse">
-        <li><a href="./employeeLogin.html">Back</a></li>
-        <li class="active"><a href="#form1" data-toggle="tab">BGC Details </a></li>
-        <li><a href="#form2" data-toggle="tab">View Requests</a></li>
-
-
+        <li><a href="../OrgHome.html">Back</a></li>
     </ul>
 
     <div class="tab-content">
@@ -29,17 +25,15 @@
             <form class="well form-horizontal" id="contact_form">
                 <fieldset>
 
-                    <!-- Form Name -->
                     <legend align="center">Personal Details</legend>
-
-                  
                     <!-- Text input-->
 
                     <div class="form-group">
                         <label class="col-md-4 control-label">Username</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="username">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="Username" disabled placeholder="Username" class="form-control" id="username" type="text">
                             </div>
                         </div>
                     </div>
@@ -51,32 +45,35 @@
                         <label class="col-md-4 control-label">First Name</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="first_name">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="First Name" placeholder="First Name" class="form-control" id="first_name" type="text">
                             </div>
                         </div>
                     </div>
 
                     <!-- Text input-->
+
                     <div class="form-group">
                         <label class="col-md-4 control-label">Middle Name</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="middle_name">Null</label>
+                                <span class="input-group-addon"><i></i></span>
+                                <input name="Middle Name" placeholder="Middle Name" class="form-control" id="middle_name" type="text">
                             </div>
                         </div>
                     </div>
 
-
                     <!-- Text input-->
-
                     <div class="form-group">
                         <label class="col-md-4 control-label">Last Name</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="last_name">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="Last Name" placeholder="Last Name" class="form-control" id="last_name" type="text">
                             </div>
                         </div>
                     </div>
+
 
                     <!-- Text input-->
 
@@ -84,7 +81,8 @@
                         <label class="col-md-4 control-label">Occupation</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="occupation">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="Occupation" placeholder="Occupation" class="form-control" type="text" id="occupation">
                             </div>
                         </div>
                     </div>
@@ -95,7 +93,8 @@
                         <label class="col-md-4 control-label">Income Range</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="income_range">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="Income Range" placeholder="Income Range" class="form-control" type="text" id="income_range">
                             </div>
                         </div>
                     </div>
@@ -109,7 +108,8 @@
                         <label class="col-md-4 control-label">Date Of Birth</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="DOB">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="Date Of Birth" placeholder="Date Of Birth" class="form-control" type="text" id="DOB">
                             </div>
                         </div>
                     </div>
@@ -117,9 +117,12 @@
                     <!-- radio checks -->
                     <div class="form-group">
                         <label class="col-md-4 control-label">Gender</label>
-                        <div class="col-md-4 inputGroupContainer">
-                            <div class="input-group">
-                                <label class="control-label" id="gender_m">Null</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label><input type="radio" name="gender" value="male" id = "gender_m" /> Male</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="gender" value="female" id = "gender_f" /> Female</label>
                             </div>
                         </div>
                     </div>
@@ -129,7 +132,8 @@
                         <label class="col-md-4 control-label">Full Residential Address</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="address">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="Full Residential Address" placeholder="Full Residential Address" class="form-control" type="text" id="address">
                             </div>
                         </div>
                     </div>
@@ -143,7 +147,8 @@
                         <label class="col-md-4 control-label">Phone number 1</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="phone_1">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="Phone number 1" placeholder="Phone number 1" class="form-control" type="text" id="phone_1">
                             </div>
                         </div>
                     </div>
@@ -154,17 +159,21 @@
                         <label class="col-md-4 control-label">Phone number 2</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="phone_2">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="Phone number 2" placeholder="Phone number 2" class="form-control" type="text" id="phone_2">
                             </div>
                         </div>
                     </div>
+
+
 
                     <!-- Text input-->
                     <div class="form-group">
                         <label class="col-md-4 control-label">Email</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="email">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="Email" disabled placeholder="Email" class="form-control" type="text" id="email">
                             </div>
                         </div>
                     </div>
@@ -174,57 +183,51 @@
                         <label class="col-md-4 control-label">Country of Residence</label>
                         <div class="col-md-4 inputGroupContainer">
                             <div class="input-group">
-                                <label class="control-label" id="country_res">Null</label>
+                                <span class="input-group-addon"><i ></i></span>
+                                <input name="Country of Residence" placeholder="Country of Residence" class="form-control" type="text" id="country_res">
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label">Org Name</label>
-                        <div class="col-md-4 inputGroupContainer">
-                            <div class="input-group">
-                                <label class="control-label" id="org_name">Null</label>
-                            </div>
-                        </div>
-                    </div>
-
-                </fieldset>
-            </form>
-        </div>
-
-
-
-
-        <div id="form2" class="tab-pane fade in">
-            <form class="well form-horizontal" id="contact_form">
-                <fieldset>
 
                     <!-- Form Name -->
-                    <legend id="viewRequests" align="center">View Requests</legend>
-                    
+
+
+                    <legend align="center">Organization declaration</legend>
+
+                    <!--Declaration-->
+                    <div class="form-group">
+                        <p align="center">
+                            I agree that I have verified all details as per government regulations.
+                        </p>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-success" id="addKYCSend" onclick="App.editEmployee(); return false">Send <span ></span></button>
+
+                            <button type="submit" class="btn btn-danger" id="deleteKYC" onclick="App.deleteEmployee(); return false">Delete <span  ></span></button>
+                        </div>
+                    </div>
 
                 </fieldset>
             </form>
         </div>
+
+
     </div>
-
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    
+
 	<!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-	
+
 	<!-- JS source files -->
     <script src="js/web3.min.js"></script>
 	<script src="js/truffle-contract.js"></script>
 	<script src="js/index.js"></script>
-	
+
 	<script type="text/javascript">
        $(function() {
 		  $(window).load(function() {
@@ -235,3 +238,5 @@
     </script>
 
 </body>
+
+</html>

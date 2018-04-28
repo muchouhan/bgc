@@ -1,7 +1,7 @@
 App = {
   web3Provider: null,
   contracts: {},
-  account: '0x345ca3e014aaf5dca488057592ee47305d9b3e10',
+  account: '0xa4392264a2d8c998901d10c154c91725b1bf0158',
   loading: false,
 
   init: function() {
@@ -203,14 +203,15 @@ viewBGCDetails: function () {
     }).then(function(result) {
         console.log("isBGCAllowed:"+result);
         if(!result){
-          var l = confirm('Access denied! Take permission from the customer to proceed');
+          var l = confirm('Access denied! Take permission from the Employee to proceed');
           if (l == true) {
               return bgcInstance.addBGCRequest.sendTransaction(user_name_v, sessionStorage.orgAddress,
                 { from: App.account, gas: 4700000 });
           }
         }else{
           sessionStorage.user_name = user_name_v;
-          window.location = './viewForm.html';
+          sessionStorage.employeeName = user_name_v;
+          window.location = './viewEmployee.html';
         }
     }).then(function(result) {
         console.log("addBGCRequest:"+result);
@@ -231,7 +232,9 @@ viewBGCDetails: function () {
     if (usnm == "") {
         alert("Valid username required!");
         window.location = './OrgHome.html';
-        return;
+        return new Promise(function(resolve, reject) {
+                  reject(new Error('Valid username required!'));
+        });
     }
 
     var bgcInstance;
@@ -246,7 +249,9 @@ viewBGCDetails: function () {
         console.log("isEmployeeExist result:"+result);
         if(result){
           alert("Given Employee already Exist in network!");
-          return;
+          return new Promise(function(resolve, reject) {
+                    reject(new Error('Given Employee already Exist in network!'));
+          });
         }
         console.log("before addEmployee:"+org_name,usnm, data,email);
         return bgcInstance.addEmployee.sendTransaction(org_name,usnm, data,email, {
@@ -262,6 +267,65 @@ viewBGCDetails: function () {
     });
 
  },
+
+ //function to create a new KYC profile
+ editEmployee: function() {
+    var data = App.getEmployeeInfo();
+    var usnm = $('#username').val();
+    var email = $('#email').val();
+    var org_name = sessionStorage.orgName;
+
+    if (usnm == "") {
+        alert("Valid username required!");
+        return new Promise(function(resolve, reject) {
+                  reject(new Error('Valid username required!'));
+        });
+    }
+
+    var bgcInstance;
+    App.contracts.BGC.deployed().then(function(instance) {
+         bgcInstance = instance;
+         console.log("Check if Employee already exist in network"+localStorage.org_address);
+          return bgcInstance.editEmployee.sendTransaction(org_name,usnm, data,email, {
+            from: sessionStorage.orgAddress,
+            gas: 500000
+        });
+    }).then(function(result) {
+        console.log("editEmployee:"+result);
+        alert("Customer profile updated successfully! Thank you!");
+        window.location = './OrgHome.html';
+    }).catch(function(err) {
+        console.error(err);
+    });
+
+ },
+
+ //function to create a new KYC profile
+ deleteEmployee: function() {
+       var usnm = $('#username').val();
+       var email = $('#email').val();
+       var org_name = sessionStorage.orgName;
+        if (confirm("Are you sure you want to delete the BGC profile " + usnm + " ?") == false) {
+               window.location = '../OrgHome.html';
+               return false;
+        }
+
+        App.contracts.BGC.deployed().then(function(instance) {
+              return bgcInstance.deleteEmployee.sendTransaction(org_name,usnm, email, {
+                from: sessionStorage.orgAddress,
+                gas: 500000
+            });
+        }).then(function(result) {
+            console.log("deleteEmployee:"+result);
+            alert("Customer profile deleted successfully! Thank you!");
+            window.location = './OrgHome.html';
+        }).catch(function(err) {
+            console.error(err);
+        });
+
+ },
+
+
 
  //  function to create a new KYC profile
  getEmployeeInfo: function() {
@@ -281,7 +345,9 @@ viewBGCDetails: function () {
       var cpassword =  $('#passwordsignup_confirm').val();
        if (password!=cpassword){
          alert("Password and Confirm Password must match!");
-         return;
+         return new Promise(function(resolve, reject) {
+                   reject(new Error('Password and Confirm Password must match!'));
+         });
        }
 
        var bgcInstance;
@@ -296,7 +362,9 @@ viewBGCDetails: function () {
          console.log("isUserExist result:"+result);
          if(!result){
            alert("Given username not Exist in network!");
-           return;
+           return new Promise(function(resolve, reject) {
+                     reject(new Error('Given username not Exist in network!'));
+           });
          }
 
          return bgcInstance.setPassword.sendTransaction(username, password, {
@@ -329,7 +397,9 @@ viewBGCDetails: function () {
      console.log("authenticateEmployee result:"+result);
      if(!result){
        alert("Given username not Exist in network!");
-       return;
+       return new Promise(function(resolve, reject) {
+                 reject(new Error('Given username not Exist in network!'));
+       });
      }
      sessionStorage.employeeName=username;
      window.location = './employeeHome.html';
@@ -354,19 +424,33 @@ viewBGCDetails: function () {
         var result = fields[1].split('!@#');
 
         $('#username').text(fields[0]);
+        $('#username').val(fields[0]);
         $('#first_name').text(result[1]);
+        $('#first_name').val(result[1]);
         $('#middle_name').text(result[2]);
+        $('#middle_name').val(result[2]);
         $('#last_name').text(result[3]);
+        $('#last_name').val(result[3]);
         $('#occupation').text(result[4]);
+        $('#occupation').val(result[4]);
         $('#income_range').text(result[5]);
+        $('#income_range').val(result[5]);
         $('#DOB').text(result[6]);
+        $('#DOB').val(result[6]);
         $('#gender_m').text(result[7]);
+        $('#gender_m').val(result[7]);
         $('#address').text(result[8]);
+        $('#address').val(result[8]);
         $('#phone_1').text(result[9]);
+        $('#phone_1').val(result[9]);
         $('#phone_2').text(result[10]);
+        $('#phone_2').val(result[10]);
         $('#country_res').text(result[11]);
+        $('#country_res').val(result[11]);
         $('#email').text(fields[2]);
+        $('#email').val(fields[2]);
         $('#org_name').text(fields[3]);
+        $('#org_name').val(fields[3]);
 
       }).catch(function(err) {
         console.error(err);
@@ -374,11 +458,115 @@ viewBGCDetails: function () {
  },
 
 showEmployeeBGCRequest: function () {
-
+       var user = sessionStorage.employeeName;
+       console.log("user:"+user);
+       if(user==undefined) return;
+       var bgcInstance;
+       App.contracts.BGC.deployed().then(function(instance) {
+           bgcInstance = instance;
+           return bgcInstance.pendingBGCRequests(user, {
+           from: App.account,
+           gas: 500000
+         });
+       }).then(function(results) {
+         console.log("pendingBGCRequests :"+results);
+         if(results=="0x0000000000000000000000000000000000000000"){
+           return new Promise(function(resolve, reject) {
+                     reject(new Error('No pending bgc for employee!'));
+           });
+         }
+         return bgcInstance.getOrgByAddress(results, {
+            from: App.account,
+            gas: 500000
+          });
+       }).then(function(org) {
+         var address = org[2];
+         sessionStorage.bgcOrg= org[2];
+         console.log("getOrgByAddress:"+address);
+           $( "#viewRequests" ).append("<div class=\"form-group\"><label class=\"col-md-4 control-label\" id = \"org_name\">" + org[0] + "</label><div class=\"col-md-4 inputGroupContainer\"><div class=\"input-group\"><button type=\"submit\" class=\"btn btn-success\" id = \"addKYCSend\" onclick = \"return App.allow(" + address + ")\">Allow </button> <button type=\"submit\" class=\"btn btn-danger\" id = \"addKYCSend1\" onclick = \"return App.deny(" + address + ")\">Deny </button> </div></div></div><br>");
+       }).catch(function(err) {
+         console.error(err);
+       });
 },
 
+allow: function(address){
+   console.log("address:"+address);
+   var user = sessionStorage.employeeName;
+   if(user==undefined) return;
+   App.contracts.BGC.deployed().then(function(instance) {
+       return instance.setBGCRequestAllow(user,sessionStorage.bgcOrg,true, {
+             from: App.account,
+             gas: 500000
+       });
+   }).then(function(result) {
+      $( "#viewRequests").empty();
+      alert("setBGCRequestAllow:"+result);
+     console.log("setBGCRequestAllow:"+result);
+   }).catch(function(err) {
+     console.error(err);
+   });
+},
 
+deny:function(address){
+  var user = sessionStorage.employeeName;
+  if(user==undefined) return;
+  App.contracts.BGC.deployed().then(function(instance) {
+      return instance.setBGCRequestAllow(user,sessionStorage.bgcOrg,false, {
+            from: App.account,
+            gas: 500000
+      });
+  }).then(function(result) {
+    $( "#viewRequests").empty();
+    console.log("setBGCRequestAllow:"+result);
+  }).catch(function(err) {
+    console.error(err);
+  });
+},
 
+clickModifyBGC:function() {
+
+  var user_name_m = $('#user_name_m').val();
+  console.log("user_name_m"+user_name_m);
+  var bgcInstance;
+  App.contracts.BGC.deployed().then(function(instance) {
+       bgcInstance = instance;
+       return instance.viewEmployeeDetails(user_name_m, {
+          from: sessionStorage.orgAddress,
+          gas: 500000
+       });
+  }).then(function(result) {
+      console.log("viewEmployeeDetails result:"+result);
+      if(result[0]==""){
+        alert("Customer not found in database!");
+        return new Promise(function(resolve, reject) {
+                  reject(new Error('Customer not found in database!'));
+        });
+      }
+      return bgcInstance.isBGCAllowed(user_name_m, sessionStorage.orgAddress, {
+          from: App.account,
+          gas: 500000
+      });
+  }).then(function(result) {
+      console.log("isBGCAllowed:"+result);
+      if(!result){
+        var l = confirm('Access denied! Take permission from the Employee to proceed');
+        if (l == true) {
+            return bgcInstance.addBGCRequest.sendTransaction(user_name_m, sessionStorage.orgAddress,
+              { from: App.account, gas: 4700000 });
+        }
+      }else{
+        sessionStorage.user_name_m = user_name_m;
+        sessionStorage.employeeName = user_name_m;
+       window.location = './modifyBGCForm.html';
+      }
+  }).then(function(result) {
+      console.log("addBGCRequest:"+result);
+
+  }).catch(function(err) {
+      console.error(err);
+  });
+
+}
 
 
 

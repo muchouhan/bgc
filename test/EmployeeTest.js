@@ -27,18 +27,27 @@ contract('BGC', function(accounts){
     });
   });
 
-it("should check whether given organization exist!", function() {
-  //forget Password
-  //create new accounts
-  //org login
-  //org details
-  //initiate kyc
-  //view pending kyc
-  //Employee create
-  //forget password Employee
-  //login Employee
-  //allow kyc
-  //view Employee detail
+it("should check whether given organization has BGC permission!", function() {
+  return BGC.deployed().then(function(instance) {
+    bgcInstance = instance;
+    return bgcInstance.viewEmployeeDetails("mukund");
+  }).then(function(result) {
+    console.log("viewEmployeeDetails:"+result);
+    assert.equal(result[0], "mukund", "mukund Employee not found in database!! ");
+    return bgcInstance.isBGCAllowed("mukund",web3.eth.accounts[1],{from:web3.eth.accounts[1]});
+  }).then(function(result) {
+       console.log("isBGCAllowed:"+result);
+       assert.equal(result, false, "Access denied! Take permission from the Employee to proceed ");
+       bgcInstance.addBGCRequest("mukund",web3.eth.accounts[1],{from:web3.eth.accounts[1]});
+       return bgcInstance.addBGCRequest("mukund",web3.eth.accounts[2],{from:web3.eth.accounts[2]});
+  }).then(function(result) {
+      console.log("addBGCRequest:"+result);
+    return bgcInstance.pendingBGCRequests("mukund",{from:web3.eth.accounts[1]});
+  }).then(function(result) {
+      console.log("Pending Request:"+result);
+      //assert.equal(result, 1, "There is problem in BGC request ");
+  });
+
 
 });
 });

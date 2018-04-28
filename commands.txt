@@ -53,83 +53,26 @@ contractInstance = VotingContract.at(deployedContract.address)
 
 
 
-  function isBGCAllowed(string _uname, address _orgAddress) public view returns(bool) {
-       for(uint i = 0; i < bgcRequests.length; ++i) {
-           if(StringUtils.equal(bgcRequests[i].uname, _uname)
-              && bgcRequests[i].orgAddress == _orgAddress
-              && bgcRequests[i].isAllowed) {
-               return true;
-           }
-       }
-       return false;
-   }
-
-   function addBGCRequest(string _uname, address _orgAddress) public payable {
-       for(uint i = 0; i < bgcRequests.length; ++ i) {
-           if(StringUtils.equal(bgcRequests[i].uname, _uname) && bgcRequests[i].orgAddress == _orgAddress) {
-               return;
-           }
-       }
-       bgcRequests.length ++;
-       bgcRequests.push(Request(_uname, _orgAddress, false));
-   }
-
-
-   function getBankRequests(string Uname, uint ind) public payable returns(address) {
-       uint j = 0;
-       for(uint i=0;i<bgcRequests.length;++i) {
-           if(StringUtils.equal(bgcRequests[i].uname, Uname) && j == ind && bgcRequests[i].isAllowed == false) {
-               return bgcRequests[i].orgAddress;
-           }
-           j ++;
-       }
-       return 0x00;
-   }
-
-
-
-   function allowBank(string Uname, address _orgAddress, bool ifallowed) public payable {
-       for(uint i = 0; i < bgcRequests.length; ++ i) {
-           if(StringUtils.equal(bgcRequests[i].uname, Uname) && bgcRequests[i].orgAddress == _orgAddress) {
-               if(ifallowed) {
-                   bgcRequests[i].isAllowed = true;
-               } else {
-                   for(uint j=i;j<bgcRequests.length-2; ++j) {
-                       bgcRequests[i] = bgcRequests[i+1];
-                   }
-                   bgcRequests.length --;
+function deleteEmployee(string _org,string _username,string _email) public {
+       for(uint i = 0; i < emps.length; ++ i) {
+         if(StringUtils.equal(emps[i].username, _username) && StringUtils.equal(emps[i].email, _email)){
+               for(uint j = i+1;j < emps.length; ++ j) {
+                   emps[i-1] = emps[i];
                }
+               emps.length --;
+           }
+       }
+   }
+   
+   
+   function editEmployee(string _org,string _username,string _data,string _email) public {
+       for(uint i = 0; i < emps.length; ++ i) {
+         if(StringUtils.equal(emps[i].username, _username) && StringUtils.equal(emps[i].email, _email)){
+               emps[i].data = _data;
                return;
            }
        }
    }
-
    
    
-      function pendingBGCRequests(string uname) public returns(address[])  {
-         address[] storage requests;
-         for(uint256 i=0;i<bgcRequests.length;++i) {
-             if(StringUtils.equal(bgcRequests[i].uname, uname) && bgcRequests[i].isAllowed == false) {
-                  requests.push(bgcRequests[i].orgAddress);
-             }
-         }
-        return requests;
-     }
-
-	 
-	 
-	 
-	 
-	   var user = sessionStorage.employeeName;
-      if(user==undefined) return;
-      App.contracts.BGC.deployed().then(function(instance) {
-       console.log("fetch employee details from network");
-       return instance.pendingBGCRequests(user, {
-        from: App.account,
-        gas: 500000
-      });
-  }).then(function(fields) {
-      console.log("showEmployeeBGCRequest :",fields);
-  }).catch(function(err) {
-    console.error(err);
-  });
+      

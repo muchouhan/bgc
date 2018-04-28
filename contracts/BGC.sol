@@ -25,9 +25,10 @@ contract BGC {
        bool isAllowed;
    }
 
-  Organization[] public orgs;
-  Employee[] public emps;
+  Organization[] orgs;
+  Employee[] emps;
   Request[] bgcRequests;
+
   function BGC() public {
   }
 
@@ -138,7 +139,63 @@ contract BGC {
        return false;
    }
 
+   function getEmployeeBGCSize() public view returns (uint) {
+     return bgcRequests.length;
+   }
 
+
+   function pendingBGCRequests(string uname) public view returns(address)  {
+      for(uint256 i=0; i < bgcRequests.length; ++i) {
+          if(StringUtils.equal(bgcRequests[i].uname, uname)
+              && bgcRequests[i].isAllowed == false)
+                return bgcRequests[i].orgAddress;
+      }
+   }
+
+   function getOrgByAddress(address _address) public view returns (string,string,address,uint256) {
+     for(uint256 i=0; i < orgs.length; ++i) {
+          if(orgs[i].password == _address)
+             return (orgs[i].name,orgs[i].regNumber,orgs[i].password,orgs[i].empCount);
+     }
+   }
+
+   function setBGCRequestAllow(string _uname, address _orgAddress, bool isAllowed) public {
+       for(uint i = 0; i < bgcRequests.length; ++ i) {
+           if(StringUtils.equal(bgcRequests[i].uname, _uname) && bgcRequests[i].orgAddress == _orgAddress) {
+               if(isAllowed) {
+                   bgcRequests[i].isAllowed = true;
+               } else {
+                   for(uint j=i; j < bgcRequests.length-2; ++j) {
+                       bgcRequests[i] = bgcRequests[i+1];
+                   }
+                   bgcRequests.length --;
+               }
+               return;
+           }
+       }
+   }
+
+
+   function editEmployee(string _org,string _username,string _data,string _email) public {
+       for(uint i = 0; i < emps.length; ++ i) {
+         if(StringUtils.equal(emps[i].username, _username) && StringUtils.equal(emps[i].email, _email)){
+               emps[i].data = _data;
+               return;
+           }
+       }
+   }
+
+
+   function deleteEmployee(string _org,string _username,string _email) public {
+          for(uint i = 0; i < emps.length; ++ i) {
+            if(StringUtils.equal(emps[i].username, _username) && StringUtils.equal(emps[i].email, _email)){
+                  for(uint j = i+1;j < emps.length; ++ j) {
+                      emps[i-1] = emps[i];
+                  }
+                  emps.length --;
+              }
+          }
+      }
 
 
 
