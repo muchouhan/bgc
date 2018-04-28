@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Employee Login</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+
+</head>
+
+<body>
+    <div class="container">
+
+        <header>
+            <h1>Employee Portal</h1>
+
+        </header>
+        <section>
+            <div id="container_demo">
+                <a class="hiddenanchor" id="toregister"></a>
+                <a class="hiddenanchor" id="tologin"></a>
+                <div id="wrapper">
+                    <div id="login" class="animate form">
+                        <form>
+                            <h1>Log in</h1>
+                            <p>
+                                <label for="username" class="uname"> Username </label>
+                                <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com" />
+                            </p>
+                            <p>
+                                <label for="password" class="youpasswd"> Password </label>
+                                <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                            </p>
+                            <p class="signin button">
+                                <input type="submit" value="Log In" onclick="App.employeeLogin(); return false" />
+                            </p>
+                            <p class="change_link">
+                                Not a member yet ?
+                                <a href="#toregister" class="to_register">Join us</a>
+                            </p>
+                        </form>
+                    </div>
+
+                    <div id="register" class="animate form">
+                        <form>
+                            <h1> Sign up </h1>
+                            <p>
+                                <label for="usernamesignup" class="uname">Username</label>
+                                <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+                            </p>
+                            <p>
+                                <label for="passwordsignup" class="youpasswd">Password</label>
+                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO" />
+                            </p>
+                            <p>
+                                <label for="passwordsignup_confirm" class="youpasswd">Confirm your password</label>
+                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO" />
+                            </p>
+                            <p class="signin button">
+                                <input type="submit" value="Sign up" onclick="App.employeeSignUp(); return false" />
+                            </p>
+                            <p class="change_link">
+                                Already a member ?
+                                <a href="#tologin" class="to_register"> Go and log in </a>
+                            </p>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+    
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+	<!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+	
+	<!-- JS source files -->
+    <script src="js/web3.min.js"></script>
+	<script src="js/truffle-contract.js"></script>
+	<script src="js/index.js"></script>
+	
+	<script type="text/javascript">
+       $(function() {
+		  $(window).load(function() {
+			App.init();
+		  });
+		});
+
+    </script>
+	
+</body>
+
+</html>

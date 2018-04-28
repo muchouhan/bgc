@@ -24,13 +24,13 @@
         <li class="active"><a href="#form2">Details</a></li>
 
         <!--enter the username of a customer to view his kyc details-->
-        <li><a data-toggle="modal" data-target="#viewKYC">View KYC</a></li>
+        <li><a data-toggle="modal" data-target="#viewKYC">View BGC</a></li>
 
         <!-- modify a persons kyc details-->
-        <li><a href="./form/addForm.html">Add KYC</a></li>
+        <li><a href="./addBgc.html">Add BGC</a></li>
 
         <!--enter the username of a customer to modify his kyc details-->
-        <li><a data-toggle="modal" data-target="#modifyKYC">Modify KYC</a></li>
+        <li><a data-toggle="modal" data-target="#modifyKYC">Modify BGC</a></li>
 
         <!--change the rating of an account holder-->
         <li><a data-toggle="modal" data-target="#modify_rating">Change customer rating</a></li>
@@ -99,7 +99,7 @@
                 <!--Modal Footer-->
                 <div class="modal-footer">
                     <!--On clicking this button verify the username from the block-chain-->
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal" id="log_in" onclick="clickViewKYC()">Search</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" id="log_in" onclick="App.viewBGCDetails()">Search</button>
                 </div>
             </div>
         </div>
@@ -182,14 +182,24 @@
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
-	<!-- JS source files -->
-    <script src="../js/web3.min.js"></script>
-	<script src="../js/truffle-contract.js"></script>
-	<script src="../js/OrgHome.js"></script>
-	<script language="JavaScript" type="text/javascript">
-		App.fillDetails();
-	 </script>
 
+	<!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+	<!-- JS source files -->
+    <script src="js/web3.min.js"></script>
+	<script src="js/truffle-contract.js"></script>
+	<script src="js/index.js"></script>
+	<script type="text/javascript">
+       $(function() {
+		  $(window).load(function() {
+			App.init();
+		  });
+		});
+		$( document ).ready(function() {
+		console.log( "ready!" );
+			//App.fillDetails();
+
+		});
+    </script>
 </body>

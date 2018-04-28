@@ -8,71 +8,140 @@ contract BGC {
     string name;
     string regNumber;
     address password;
-    uint empCount;
+    uint256 empCount;
   }
 
   struct Employee {
-        address empAddr;
         string password;
-        string fName;
-        string lName;
-        string cAddress;
-        uint mobile;
+        string username;
+        string data;
+        string email;
         address currentOrgAddr;
-        uint experience;
     }
 
-  mapping(address => Organization) orgs;
-  address[] public orgsAddr;
+  struct Request {
+       string uname;
+       address orgAddress;
+       bool isAllowed;
+   }
 
-  mapping(address => Employee) emps;
-  address[] public empsAddr;
-
+  Organization[] public orgs;
+  Employee[] public emps;
+  Request[] bgcRequests;
   function BGC() public {
   }
 
   function isOrgExist(string _name,string _regNumber) public view returns (bool) {
-    for(uint i = 0;i < orgsAddr.length; ++ i) {
-        if(StringUtils.equal(orgs[orgsAddr[i]].name, _name) && StringUtils.equal(orgs[orgsAddr[i]].regNumber, _regNumber))
-            return true;
+    for (uint256 i = 0; i < orgs.length; ++i) {
+         if(StringUtils.equal(orgs[i].name, _name) && StringUtils.equal(orgs[i].regNumber, _regNumber))
+          return true;
     }
     return false;
   }
 
-  function addOrg(string _name,string _regNumber,address _password) public {
-    orgs[_password] = Organization(_name,_regNumber,_password,0);
-    orgsAddr.push(_password);
+  function addOrg(string _name,string _regNumber,address _password) public returns(uint256) {
+     orgs.push(Organization(_name,_regNumber,_password,0));
+     return orgs.length;
   }
 
-  function getOrg(address ins) public view returns (string,string,address,uint) {
-    return (orgs[ ins].name,orgs[ins].regNumber,orgs[ins].password,orgs[ins].empCount);
+  function getOrg(string _name) public view returns (string,string,address,uint256) {
+    for(uint256 i=0; i < orgs.length; ++i) {
+         if(StringUtils.equal(orgs[i].name, _name))
+            return (orgs[i].name,orgs[i].regNumber,orgs[i].password,orgs[i].empCount);
+    }
   }
 
   function getOrgSize() public view returns (uint) {
-    return orgsAddr.length;
+    return orgs.length;
   }
 
-  function authenticateOrg(string org, address _password) public view returns (bool) {
-    return StringUtils.equal(orgs[_password].name,org);
+  function authenticateOrg(string org_name, address _password) public view returns (bool) {
+    for (uint256 i = 0; i < orgs.length; ++i) {
+         if(StringUtils.equal(orgs[i].name, org_name) && orgs[i].password == _password)
+          return true;
+    }
+    return false;
   }
 
-  ///////////////////////Employee /////////////////
+  ///////////////////////Employee ////////////////
+   function addEmployee(string _org,string _username,string _data,string _email) public returns (uint256) {
+      emps.push(Employee( "", _username, _data, _email,msg.sender));
+      for(uint256 i=0; i < orgs.length; ++i) {
+           if(StringUtils.equal(orgs[i].name, _org) && orgs[i].password == msg.sender){
+               orgs[i].empCount++;
+              return orgs[i].empCount;
+           }
+      }
+      return 0;
+    }
 
-  function addEmployee(string _password,string _fName,string _lName,string _cAddress,uint _mob,address _org,uint _exp) public {
-    emps[msg.sender] = Employee({empAddr:msg.sender,password:_password,fName:_fName,lName:_lName,cAddress:_cAddress,mobile:_mob,currentOrgAddr:_org,experience:_exp});
-    empsAddr.push(msg.sender);
-  }
+    function isEmployeeExist(string _username,string _email) public view returns (bool) {
+      for (uint256 i = 0; i < emps.length; ++i) {
+           if(StringUtils.equal(emps[i].username, _username) && StringUtils.equal(emps[i].email, _email))
+            return true;
+      }
+      return false;
+    }
 
-  function getEmployee(address ins) public view returns (string,string,string,uint,address,uint) {
-    return (emps[ins].fName,emps[ins].lName,emps[ins].cAddress,emps[ins].mobile,emps[ins].currentOrgAddr,emps[ins].experience);
-  }
+    function getEmployeeSize() public view returns (uint) {
+      return emps.length;
+    }
 
-  function getEmployeeSize() public view returns (uint) {
-    return empsAddr.length;
-  }
+    function isUserExist(string _username) public view returns (bool) {
+       for (uint256 i = 0; i < emps.length; ++i) {
+            if(StringUtils.equal(emps[i].username, _username))
+              return true;
+       }
+       return false;
+     }
 
-  function authenticateEmployee(address empAddr, string _password) public view returns (bool) {
-    return StringUtils.equal(emps[empAddr].password,_password);
-  }
+     function setPassword(string _username,string _password) public {
+           for (uint256 i = 0; i < emps.length; ++i) {
+                if(StringUtils.equal(emps[i].username, _username))
+                 emps[i].password=_password;
+           }
+     }
+
+    function authenticateEmployee(string _username, string _password) public view returns (bool) {
+           for (uint256 i = 0; i < emps.length; ++i) {
+                if (StringUtils.equal(emps[i].username, _username) && StringUtils.equal(emps[i].password, _password))
+                  return true;
+           }
+           return false;
+    }
+
+    function viewEmployeeDetails(string _name) public view returns (string,string,string,address) {
+      for(uint256 i=0; i < emps.length; ++i) {
+           if(StringUtils.equal(emps[i].username, _name))
+              return (emps[i].username, emps[i].data, emps[i].email, emps[i].currentOrgAddr);
+      }
+    }
+
+///////////////////////////////BGC//////////////////////////
+    function addBGCRequest(string _uname, address _orgAddress) public {
+             for(uint256 i = 0; i < bgcRequests.length; ++ i) {
+                 if(StringUtils.equal(bgcRequests[i].uname, _uname) && bgcRequests[i].orgAddress == _orgAddress) {
+                     return;
+                 }
+             }
+             bgcRequests.push(Request(_uname, _orgAddress, false));
+    }
+
+    function isBGCAllowed(string _uname, address _orgAddress) public view returns(bool) {
+       for(uint256 i = 0; i < bgcRequests.length; ++i) {
+           if(StringUtils.equal(bgcRequests[i].uname, _uname)
+              && bgcRequests[i].orgAddress == _orgAddress
+              && bgcRequests[i].isAllowed) {
+               return true;
+           }
+       }
+       return false;
+   }
+
+
+
+
+
+
 
 }

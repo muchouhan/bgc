@@ -20,7 +20,7 @@ contract('BGC', function(accounts){
       assert.equal(flag, false, "LTI organization already exist in network! ");
       return bgcInstance.addOrg("LTI","123456",web3.eth.accounts[1],{from:web3.eth.accounts[1]});
     }).then(function() {
-      return bgcInstance.getOrg(web3.eth.accounts[1]);
+      return bgcInstance.getOrg("LTI");
     }).then(function(data) {
       console.log("getOrg:"+data);
       assert.equal(data[0], "LTI", "Org name must be LTI");

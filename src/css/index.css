@@ -47,7 +47,7 @@ footer, header, hgroup, menu, nav, section {
 /* General Demo Style */
 body{
 	font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
-	background: #fff url(../images/bg.jpg) repeat top left;
+	background: #fff url(../images/bg3.jpg) repeat top left;
 	font-weight: 400;
 	font-size: 15px;
 	color: #1d3c41;
@@ -159,7 +159,7 @@ a{
 
 /* remove codrops styles and reset the whole thing */
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
-body{background: url(./images/bg2.jpg);
+body{background: url(../images/bg2.jpg);
 background-attachment:fixed;
 background-size:cover;
 }
